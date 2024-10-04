@@ -23,8 +23,19 @@ int main(){
     for (int i = 0; i < num; i++) {
         cout << Arr[i] << " ";
     }
-    cout << endl << endl;
-    
+    cout << endl <<endl;
+    // Contar el tiempo empleado de la funcion shellsort
+    clock_t start = clock();
+    shellsort(Arr, num);
+    clock_t end = clock();
+
+    cout<<"Arreglo Ordenado usando ShellSort:";
+    for(int i=0;i<num;i++){
+        cout<<Arr[i]<<" ";
+    }
+
+    cout<<endl;
+    cout<<"Tiempo empleaddo de la funcion ShellSort: "<< shellsort<<endl;
     return 0;
 }
 
