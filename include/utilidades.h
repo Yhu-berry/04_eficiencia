@@ -1,12 +1,14 @@
 #ifndef UTILIDADES_H
-
 #define UTILIDADES_H
 
-//Generar un arreglo aleatorio
+#include <iostream>
+using namespace std;
 
-//Copiar el tamaño del arreglo para que todos posean el mismo
-
-//Funcion para imprimir el arreglo
+void mostrarArreglo(int a[], int n){
+    for(int i=0; i<n; i++){
+        cout << a[i] << " ";
+    }
+}
 
 
 #endif
