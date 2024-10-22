@@ -1,0 +1,90 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "create build directory",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "if (-not (Test-Path -Path build)) { New-Item -ItemType Directory -Path build }"
+            ]
+        },
+        {
+            "label": "compile main",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-c", "src/main.cpp",
+                "-o", "build/main.o"
+            ],
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": "create build directory"
+        },
+        {
+            "label": "compile busqueda",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-c", "src/busqueda.cpp",
+                "-o", "build/busqueda.o"
+            ],
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": "create build directory"
+        },
+        {
+            "label": "compile ordenacion",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-c", "src/ordenacion.cpp",
+                "-o", "build/ordenacion.o"
+            ],
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": "create build directory"
+        },
+        {
+            "label": "compile utilidades",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-c", "src/utilidades.cpp",
+                "-o", "build/utilidades.o"
+            ],
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": "create build directory"
+        },
+        {
+            "label": "link",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "build/main.o",
+                "build/busqueda.o",
+                "build/ordenacion.o",
+                "build/utilidades.o",
+                "-o",
+                "proyecto.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "compile main",
+                "compile busqueda",
+                "compile ordenacion",
+                "compile utilidades"
+            ]
+        }
+    ]
+}
