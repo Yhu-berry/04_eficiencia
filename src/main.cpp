@@ -1,7 +1,9 @@
-#include "utilidades.h"
-#include "ordenacion.h"
-#include "busqueda.h"
+#include "../include/utilidades.h"
+#include "../include/ordenacion.h"
+#include "../include/busqueda.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -92,19 +94,101 @@ void menuOrdenacion(int arr[], int n) {
 }
 
 void menuBusqueda(int arr[], int n) {
-    cout << "=============================" << endl;
-    cout << " Metodos de Busqueda a Comparar " << endl;
-    cout << "=============================" << endl;
-    cout << "1. Busqueda Binaria vs Busqueda Secuencial" << endl;
-    cout << "Seleccione una opcion: ";
-    int opcionBusqueda;
-    cin >> opcionBusqueda;
 
-    switch (opcionBusqueda) {
-        case 1:
-            // Llamar a las funciones correspondientes para la comparaci√≥n de b√∫squeda
-            break;
-        default:
-            cout << "Intente de nuevo." << endl;
-    }
+    srand(time(0));
+    int cantidadDatos[100], cantidadBusquedas[100]; 
+	Metodos promedio[100];
+    int C=0;
+    char opcion;
+    int datos, busquedas;
+    do{
+    	cout << "=============================" << endl;
+	    cout << " Metodos de Busqueda a Comparar " << endl;
+	    cout << "=============================" << endl << endl;
+    	cout << "1) Hacer comparacion." << endl
+    		<< "2) Historial." << endl
+    		<< "3) Salir." << endl
+    		<< "= "; cin >> opcion;
+    		
+    		system("cls");
+    		cout << endl;
+    		
+    		switch(opcion){
+    			case '1': {
+    				//se piden los datos
+    				cout << "Indique la cantidad de datos a buscar: ";
+				    cin >> cantidadDatos[C];
+				    cout << "Indique cuantas busquedas simultaneas quiere realizar: ";
+				    cin >> cantidadBusquedas[C];
+				    
+				    datos = cantidadDatos[C];
+				    busquedas = cantidadBusquedas[C];
+				    int arreglo[datos], elementoBuscar[busquedas];
+				    Metodos tiempo[busquedas];
+				    clock_t inicio, fin;
+				    int REPETICIONES=500000;
+	
+					cout << endl;
+		            // LÛgica para generar un arreglo sin n˙meros repetidos
+		            for (int i = 0; i < datos; i++) {
+		                arreglo[i] = i;
+		            }
+		
+		            //Se muestra el arreglo
+		            cout << "Arreglo: ";
+		            mostrarArreglo(arreglo, datos);
+		            cout << endl;
+		
+		            //Hallar el tiempo por busqueda establecida
+		            for(int i=0; i<busquedas; i++) {
+		                elementoBuscar[i] = rand() % datos;
+		                
+		                //Busqueda Binaria
+		                inicio = clock();
+		                for(int j=0; j<REPETICIONES; j++) {
+		                    busquedaBinaria(arreglo, datos, elementoBuscar[j]);
+		                }
+		                fin = clock();
+		                tiempo[i].busquedaBinaria = (double(fin - inicio) * 1000 / CLOCKS_PER_SEC)/REPETICIONES;
+		                
+		                //Busqueda Exponencial
+		                inicio = clock();
+		                for(int j=0; j<REPETICIONES; j++) {
+		                    busquedaExponencial(arreglo, datos, elementoBuscar[j]);
+		                }
+		                fin = clock();
+		                tiempo[i].busquedaExponencial = (double(fin - inicio) * 1000 / CLOCKS_PER_SEC)/REPETICIONES;
+		            }
+		            
+		            //Hallar promedio
+		            promedio[C].busquedaBinaria = 0;
+		            promedio[C].busquedaExponencial = 0;
+		            for(int i=0; i<busquedas; i++){
+		            	promedio[C].busquedaBinaria += tiempo[i].busquedaBinaria;
+		            	promedio[C].busquedaExponencial += tiempo[i].busquedaExponencial;
+					}
+					
+					imprimirComparacion(tiempo, promedio, busquedas, C, datos, busquedas, elementoBuscar);
+	            	break;
+	            }
+    			case '2':
+    				cout << "HISTORIAL DE COMPARACIONES" << endl << endl;
+	                for (int i = 0; i < C; i++) {
+	                    cout << "COMPARACION " << i+1 << endl;
+	                    cout << "Datos analizados: " << cantidadDatos[i] << endl;
+	                    cout << "Busquedas realizadas: " << cantidadBusquedas[i] << endl;
+	                    cout << "Promedio de busqueda binaria: " << promedio[i].busquedaBinaria << " ms." << endl;
+	                    cout << "Promedio de busqueda exponencial: " << promedio[i].busquedaExponencial << " ms." << endl;
+	                    cout << endl;
+	                }
+    				break;
+    			case '3':
+    				cout << "Saliendo del programa." << endl;
+    				break;
+    			default:
+    				cout << "No valido." << endl;
+    				break;
+			}
+	        system("pause");
+	    } while(opcion!='3');
 }

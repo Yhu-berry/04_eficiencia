@@ -1,4 +1,4 @@
-#include "utilidades.h"
+#include "../include/utilidades.h"
 #include <iostream> 
 #include <cstdlib> //Libreria necesaria para la funcion rand()
 #include <ctime>
@@ -24,4 +24,10 @@ void imprimirArr(const int* arr, int n){
         std::cout << arr[i]<<" ";
     }
     std::cout<<std::endl;
+}
+
+void mostrarArreglo(int a[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
 }

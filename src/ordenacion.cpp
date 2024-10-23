@@ -1,4 +1,4 @@
-#include "ordenacion.h"
+ #include "../include/ordenacion.h"
 
 //Shellsort
 

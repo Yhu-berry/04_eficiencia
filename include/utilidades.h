@@ -1,16 +1,22 @@
 #ifndef UTILIDADES_H
-
 #define UTILIDADES_H
+#include <iostream>
+using namespace std;
 
-//Generar un arreglo aleatorio
-void generarArreglo(int* arr,int n);
+// Generar un arreglo aleatorio
+void generarArreglo(int* arr, int n);
 
-//Copiar el tamaÃ±o del arreglo para que todos posean el mismo
+// Copiar el tamaño del arreglo para que todos posean el mismo
 void copiarArr(int* Arr_crlV, const int* Arr_crlC, int n);
-//Funcion para imprimir el arreglo
+
+// Función para imprimir el arreglo
 void imprimirArr(const int* arr, int n);
 
-//Designar el tamaÃ±o maximo del arreglo
-const int n_Max=1000000;
+// Mostrar el arreglo
+void mostrarArreglo(int a[], int n);
+
+// Designar el tamaño máximo del arreglo
+const int n_Max = 1000000;
 
 #endif
+
