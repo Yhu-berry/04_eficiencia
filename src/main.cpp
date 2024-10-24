@@ -1,29 +1,30 @@
-#include "../include/utilidades.h"
-#include "../include/ordenacion.h"
-#include "../include/busqueda.h"
+#include "utilidades.h"
+#include "ordenacion.h"
+#include "busqueda.h"
+#include <chrono>   //Libreria para medir el tiempo en milisegundos
+#include <iomanip>  // Libreria para manipulacion de flujo de salida
+#include <cstdlib>  // Libreria necesaria para la funcion rand()
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+
 
 using namespace std;
 
 void menudeMain();
 void menuOrdenacion(int arr[], int n);
-
 void menuBusqueda(int arr[], int n);
 
 int main() {
     int n;
-    cout << "Cantidad de terminos a comparar (m谩ximo 1000000):\t";
+    cout << "Cantidad de terminos a comparar (maximo 1000000):\t";
     cin >> n;
     cout<<"\n";
+
     int* arr = new int[n];
     generarArreglo(arr, n);
-    cout << "Arreglo generado: ";
-    imprimirArr(arr, n);
-
+   
     int opcion;
     do {
+        system("CLS"); // Limpia la pantalla
         menudeMain();
         cin >> opcion;
 
@@ -38,7 +39,7 @@ int main() {
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opci贸n no v谩lida. Intente de nuevo." << endl;
+                cout << "Intente de nuevo." << endl;
         }
     } while (opcion != 3);
 
@@ -56,7 +57,9 @@ void menudeMain() {
     cout << "Seleccione una opcion: ";
 }
 
-void menuOrdenacion(int arr[], int n) {
+void menuOrdenacion(int arr[], int n) { 
+    int opcionOrdenacion;
+    system("CLS");
     cout << "=============================" << endl;
     cout << " Metodos de Ordenacion a Comparar " << endl;
     cout << "=============================" << endl;
@@ -64,131 +67,118 @@ void menuOrdenacion(int arr[], int n) {
     cout << "2. QuickSort vs InsercionBinaria" << endl;
     cout << "3. InsercionBinaria vs ShellSort" << endl;
     cout << "Seleccione una opcion: ";
-    int opcionOrdenacion;
     cin >> opcionOrdenacion;
+    system("CLS");
 
-    int* Arr_crlV = new int[n];
-    copiarArr(Arr_crlV, arr, n);
+    //Crear copias del arreglo original para cada m茅todo de ordenaci贸n
+    int* Arr_crlV1 = new int[n];
+    int* Arr_crlV2 = new int[n];
+    copiarArr(Arr_crlV1, arr, n);
+    copiarArr(Arr_crlV2, arr, n);
+
+    //Variables para medir el tiempo de ejecucion
+    chrono::steady_clock::time_point start,end;
+    chrono::duration<double,milli> elapsedTime1, elapsedTime2;
 
     switch (opcionOrdenacion) {
         case 1:
-            shellsort(Arr_crlV, n);
-            cout << "Arreglo ordenado (ShellSort): ";
-            imprimirArr(Arr_crlV, n);
+            // Comparaci贸n ShellSort
+            start = chrono::steady_clock::now();
+            shellsort(Arr_crlV1, n);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "ShellSort: " << elapsedTime1.count() << " ms" << endl;
+
+            // Comparaci贸n QuickSort
+            start = chrono::steady_clock::now();
+            QuickSort(Arr_crlV2, 0, n - 1);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "QuickSort: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 2:
-            // QuickSort(arrCopia, n);
-            // cout << "Arreglo ordenado (QuickSort): ";
-            // imprimirArr(arrCopia, n);
+            start = chrono::steady_clock::now();
+            QuickSort(Arr_crlV1, 0, n - 1);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "QuickSort: " << elapsedTime1.count() << " ms" << endl;
+
+            start = chrono::steady_clock::now();
+            InsercionBinaria(Arr_crlV2, n);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "Insercion Binaria: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 3:
-            // InsercionBinaria(arrCopia, n);
-            // cout << "Arreglo ordenado (InsercionBinaria): ";
-            // imprimirArr(arrCopia, n);
+            start = chrono::steady_clock::now();
+            InsercionBinaria(Arr_crlV1, n);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "Insercion Binaria: " << elapsedTime1.count() << " ms" << endl;
+            
+            start = chrono::steady_clock::now();
+            shellsort(Arr_crlV2, n);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "ShellSort: " << elapsedTime2.count() << " ms" << endl;
             break;
         default:
             cout << "Intente de nuevo." << endl;
     }
 
-    delete[] Arr_crlV;
+    // Liberar memoria
+    delete[] Arr_crlV1;
+    delete[] Arr_crlV2;
+    system("pause"); 
 }
 
 void menuBusqueda(int arr[], int n) {
+    int opcionBusqueda;
+    system("CLS");
+    cout << "=============================" << endl;
+    cout << " Metodos de Busqueda a Comparar " << endl;
+    cout << "=============================" << endl;
+    cout << "1. Busqueda Binaria vs Busqueda Exponencial" << endl;
+    cout << "Seleccione una opcion: ";
+    cin >> opcionBusqueda;
+    system("CLS");
 
-    srand(time(0));
-    int cantidadDatos[100], cantidadBusquedas[100]; 
-	Metodos promedio[100];
-    int C=0;
-    char opcion;
-    int datos, busquedas;
-    do{
-    	cout << "=============================" << endl;
-	    cout << " Metodos de Busqueda a Comparar " << endl;
-	    cout << "=============================" << endl << endl;
-    	cout << "1) Hacer comparacion." << endl
-    		<< "2) Historial." << endl
-    		<< "3) Salir." << endl
-    		<< "= "; cin >> opcion;
-    		
-    		system("cls");
-    		cout << endl;
-    		
-    		switch(opcion){
-    			case '1': {
-    				//se piden los datos
-    				cout << "Indique la cantidad de datos a buscar: ";
-				    cin >> cantidadDatos[C];
-				    cout << "Indique cuantas busquedas simultaneas quiere realizar: ";
-				    cin >> cantidadBusquedas[C];
-				    
-				    datos = cantidadDatos[C];
-				    busquedas = cantidadBusquedas[C];
-				    int arreglo[datos], elementoBuscar[busquedas];
-				    Metodos tiempo[busquedas];
-				    clock_t inicio, fin;
-				    int REPETICIONES=500000;
-	
-					cout << endl;
-		            // L骻ica para generar un arreglo sin n鷐eros repetidos
-		            for (int i = 0; i < datos; i++) {
-		                arreglo[i] = i;
-		            }
-		
-		            //Se muestra el arreglo
-		            cout << "Arreglo: ";
-		            mostrarArreglo(arreglo, datos);
-		            cout << endl;
-		
-		            //Hallar el tiempo por busqueda establecida
-		            for(int i=0; i<busquedas; i++) {
-		                elementoBuscar[i] = rand() % datos;
-		                
-		                //Busqueda Binaria
-		                inicio = clock();
-		                for(int j=0; j<REPETICIONES; j++) {
-		                    busquedaBinaria(arreglo, datos, elementoBuscar[j]);
-		                }
-		                fin = clock();
-		                tiempo[i].busquedaBinaria = (double(fin - inicio) * 1000 / CLOCKS_PER_SEC)/REPETICIONES;
-		                
-		                //Busqueda Exponencial
-		                inicio = clock();
-		                for(int j=0; j<REPETICIONES; j++) {
-		                    busquedaExponencial(arreglo, datos, elementoBuscar[j]);
-		                }
-		                fin = clock();
-		                tiempo[i].busquedaExponencial = (double(fin - inicio) * 1000 / CLOCKS_PER_SEC)/REPETICIONES;
-		            }
-		            
-		            //Hallar promedio
-		            promedio[C].busquedaBinaria = 0;
-		            promedio[C].busquedaExponencial = 0;
-		            for(int i=0; i<busquedas; i++){
-		            	promedio[C].busquedaBinaria += tiempo[i].busquedaBinaria;
-		            	promedio[C].busquedaExponencial += tiempo[i].busquedaExponencial;
-					}
-					
-					imprimirComparacion(tiempo, promedio, busquedas, C, datos, busquedas, elementoBuscar);
-	            	break;
-	            }
-    			case '2':
-    				cout << "HISTORIAL DE COMPARACIONES" << endl << endl;
-	                for (int i = 0; i < C; i++) {
-	                    cout << "COMPARACION " << i+1 << endl;
-	                    cout << "Datos analizados: " << cantidadDatos[i] << endl;
-	                    cout << "Busquedas realizadas: " << cantidadBusquedas[i] << endl;
-	                    cout << "Promedio de busqueda binaria: " << promedio[i].busquedaBinaria << " ms." << endl;
-	                    cout << "Promedio de busqueda exponencial: " << promedio[i].busquedaExponencial << " ms." << endl;
-	                    cout << endl;
-	                }
-    				break;
-    			case '3':
-    				cout << "Saliendo del programa." << endl;
-    				break;
-    			default:
-    				cout << "No valido." << endl;
-    				break;
-			}
-	        system("pause");
-	    } while(opcion!='3');
+    int* Arr_crlV = new int[n];
+    copiarArr(Arr_crlV, arr, n);
+    
+    // Ordenar el arreglo antes de realizar las b煤squedas
+    shellsort(Arr_crlV, n);
+
+    // Mostrar el arreglo ordenado
+    cout << "Arreglo ordenado: ";
+    imprimirArr(Arr_crlV, n);
+
+    // Variables para medir el tiempo
+    chrono::steady_clock::time_point start, end;
+    chrono::duration<double, milli> elapsedTime1, elapsedTime2;
+
+    if (opcionBusqueda == 1) {
+        int dato;
+        cout << "Ingrese el dato a buscar: ";
+        cin >> dato;
+        // Comparaci贸n B煤squeda Binaria
+        start = chrono::steady_clock::now();
+        int resultadoBinaria = BusquedaBinaria(Arr_crlV, n, dato);
+        end = chrono::steady_clock::now();
+        elapsedTime1 = end - start;
+        cout << "Busqueda Binaria: " << elapsedTime1.count() <<"ms, Posicion: "<<resultadoBinaria<<endl;
+        
+        // Comparaci贸n B煤squeda exponecial
+        start = chrono::steady_clock::now();
+        int resultadoExponencial = busquedaExponencial(Arr_crlV, n, dato);
+        end = chrono::steady_clock::now();
+        elapsedTime2 = end - start;
+        cout << "Busqueda Exponencial: " << elapsedTime2.count()<< "ms, Posicion: "<<resultadoExponencial<<endl;
+    } else {
+        cout << "Opcion no valida." << endl;
+    }
+
+    delete[] Arr_crlV;
+    system("pause"); // Pausa para que el usuario pueda ver lo
 }
+
