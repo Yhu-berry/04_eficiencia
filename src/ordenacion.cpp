@@ -76,3 +76,24 @@ void QuickSort(int* Arr_crlV, int inicio, int final) {
 }
 
 //Insercion Binaria
+void InsercionBinaria(int* Arr_crlV, int n) {
+    for (int i = 1; i < n; ++i) {
+        int aux = Arr_crlV[i];
+        int izq = 0;
+        int der = i - 1;
+
+        while (izq <= der) {
+            int m = (izq + der) / 2;
+            if (aux < Arr_crlV[m]) {
+                der = m - 1;
+            } else {
+                izq = m + 1;
+            }
+        }
+
+        for (int j = i - 1; j >= izq; --j) {
+            Arr_crlV[j + 1] = Arr_crlV[j];
+        }
+        Arr_crlV[izq] = aux; // inserción
+    }
+}
