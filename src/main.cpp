@@ -1,13 +1,16 @@
 #include "utilidades.h"
 #include "ordenacion.h"
 #include "busqueda.h"
+#include <chrono>   //Libreria para medir el tiempo en milisegundos
+#include <iomanip>  // Libreria para manipulacion de flujo de salida
+#include <cstdlib> // Libreria necesaria para la funcion rand()
 #include <iostream>
+
 
 using namespace std;
 
 void menudeMain();
 void menuOrdenacion(int arr[], int n);
-
 void menuBusqueda(int arr[], int n);
 
 int main() {
@@ -15,13 +18,13 @@ int main() {
     cout << "Cantidad de terminos a comparar (máximo 1000000):\t";
     cin >> n;
     cout<<"\n";
+
     int* arr = new int[n];
     generarArreglo(arr, n);
-    cout << "Arreglo generado: ";
-    imprimirArr(arr, n);
-
+   
     int opcion;
     do {
+        system("CLS"); // Limpia la pantalla
         menudeMain();
         cin >> opcion;
 
@@ -36,7 +39,7 @@ int main() {
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción no válida. Intente de nuevo." << endl;
+                cout << "Intente de nuevo." << endl;
         }
     } while (opcion != 3);
 
@@ -54,7 +57,9 @@ void menudeMain() {
     cout << "Seleccione una opcion: ";
 }
 
-void menuOrdenacion(int arr[], int n) {
+void menuOrdenacion(int arr[], int n) { 
+    int opcionOrdenacion;
+    system("CLS");
     cout << "=============================" << endl;
     cout << " Metodos de Ordenacion a Comparar " << endl;
     cout << "=============================" << endl;
@@ -62,33 +67,59 @@ void menuOrdenacion(int arr[], int n) {
     cout << "2. QuickSort vs InsercionBinaria" << endl;
     cout << "3. InsercionBinaria vs ShellSort" << endl;
     cout << "Seleccione una opcion: ";
-    int opcionOrdenacion;
     cin >> opcionOrdenacion;
+    system("CLS");
 
-    int* Arr_crlV = new int[n];
-    copiarArr(Arr_crlV, arr, n);
+    //Crear copias del arreglo original para cada método de ordenación
+    int* Arr_crlV1 = new int[n];
+    int* Arr_crlV2 = new int[n];
+    copiarArr(Arr_crlV1, arr, n);
+    copiarArr(Arr_crlV2, arr, n);
+
+    //Variables para medir el tiempo de ejecucion
+    chrono::steady_clock::time_point start,end;
+    chrono::duration<double,milli> elapsedTime1. elapsedTime2;
 
     switch (opcionOrdenacion) {
         case 1:
-            shellsort(Arr_crlV, n);
-            cout << "Arreglo ordenado (ShellSort): ";
-            imprimirArr(Arr_crlV, n);
+            // Comparación ShellSort
+            start = chrono::steady_clock::now();
+            shellsort(Arr_crlV1, n);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "ShellSort: " << elapsedTime1.count() << " ms" << endl;
+
+            // Comparación QuickSort
+            start = chrono::steady_clock::now();
+            QuickSort(Arr_crlV2, 0, n - 1);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "QuickSort: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 2:
-            // QuickSort(arrCopia, n);
-            // cout << "Arreglo ordenado (QuickSort): ";
-            // imprimirArr(arrCopia, n);
+            start = chrono::steady_clock::now();
+            QuickSort(Arr_crlV1, 0, n - 1);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "QuickSort: " << elapsedTime1.count() << " ms" << endl;
+
+            start = chrono::steady_clock::now();
+            InsercionBinaria(Arr_crlV2, n);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "Inserción Binaria: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 3:
-            // InsercionBinaria(arrCopia, n);
-            // cout << "Arreglo ordenado (InsercionBinaria): ";
-            // imprimirArr(arrCopia, n);
+            
             break;
         default:
             cout << "Intente de nuevo." << endl;
     }
 
-    delete[] Arr_crlV;
+    // Liberar memoria
+    delete[] Arr_crlV1;
+    delete[] Arr_crlV2;
+    system("pause"); 
 }
 
 void menuBusqueda(int arr[], int n) {
