@@ -133,20 +133,46 @@ void menuOrdenacion(int arr[], int n) {
 }
 
 void menuBusqueda(int arr[], int n) {
-    cout << "=============================" << endl;
-    cout << " Metodos de Busqueda a Comparar " << endl;
-    cout << "=============================" << endl;
-    cout << "1. Busqueda Binaria vs Busqueda Secuencial" << endl;
-    cout << "Seleccione una opcion: ";
     int opcionBusqueda;
+    system("CLS");
+    cout << "=============================" << endl;
+    cout << " Métodos de Búsqueda a Comparar " << endl;
+    cout << "=============================" << endl;
+    cout << "1. Búsqueda Binaria vs Búsqueda Secuencial" << e
+    cout << "Seleccione una opción: ";
     cin >> opcionBusqueda;
-
-    switch (opcionBusqueda) {
-        case 1:
-            // Llamar a las funciones correspondientes para la comparación de búsqueda
-            break;
-        default:
-            cout << "Intente de nuevo." << endl;
+    system("CLS");
+    int* Arr_crlV = new int[n];
+    copiarArr(Arr_crlV, arr, n);
+    Busqueda 3
+    // Ordenar el arreglo antes de realizar las búsquedas
+    shellsort(Arr_crlV, n);
+    // Mostrar el arreglo ordenado
+    cout << "Arreglo ordenado: ";
+    imprimirArr(Arr_crlV, n);
+    // Variables para medir el tiempo
+    chrono::steady_clock::time_point start, end;
+    chrono::duration<double, milli> elapsedTime1, elapsedTime2
+    if (opcionBusqueda == 1) {
+    int dato;
+    cout << "Ingrese el dato a buscar: ";
+    cin >> dato;
+    // Comparación Búsqueda Binaria
+    start = chrono::steady_clock::now();
+    int resultadoBinaria = BusquedaBinaria(Arr_crlV, n, da
+    end = chrono::steady_clock::now();
+    elapsedTime1 = end - start;
+    cout << "Búsqueda Binaria: " << elapsedTime1.count() <
+    // Comparación Búsqueda Secuencial
+    start = chrono::steady_clock::now();
+    int resultadoSecuencial = SecuencialOrd(Arr_crlV, n, d
+    end = chrono::steady_clock::now();
+    elapsedTime2 = end - start;
+    cout << "Búsqueda Secuencial: " << elapsedTime2.count
+    } else {
+    cout << "Opción no válida." << endl;
     }
+    delete[] Arr_crlV;
+    system("pause"); // Pausa para que el usuario pueda ver lo
 }
 
