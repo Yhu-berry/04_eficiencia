@@ -4,6 +4,7 @@
 #include <ctime>
 #include <algorithm>
 #include <random> 
+#include <iomanip> 
 using namespace std;
 
 //Funcion para generar arreglo aleatorio
@@ -43,17 +44,16 @@ void imprimirComparacion(Metodos tiempo[], Metodos promedio[], int n, int c, int
                 cout << "\tBUSQUEDA BINARIA" << "\t\t\t" << "BUSQUEDA EXPONENCIAL" << endl << endl;
     for (int i = 0; i < n; i++) {
 
-        cout << /*" (" << elementoBuscar[i] << ") " << */ "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "):" << tiempo[i].busquedaBinaria << " ms" << "\t\t\t"  << tiempo[i].busquedaExponencial << " ms" << endl;
+        cout << /*" (" << elementoBuscar[i] << ") " << */ "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "):" << fixed << setprecision(7) << tiempo[i].busquedaBinaria << " ms" << "\t\t\t"  << tiempo[i].busquedaExponencial << " ms" << endl;
     }
     cout << endl;
     cout << "\tPromedio: " << promedio[c].busquedaBinaria 
          << "\t\t\t" << "Promedio: " << promedio[c].busquedaExponencial << endl;
 }
 
-void mezclarArreglo(int* arreglo	, int tamano) {
-    // Inicializa el generador de números aleatorios con la semilla actual
+void mezclarArreglo(int* arreglo, int tamano) {
     default_random_engine engine(static_cast<unsigned int>(time(0)));
-    
-    // Mezcla el arreglo
     shuffle(arreglo, arreglo + tamano, engine);
 }
+
+

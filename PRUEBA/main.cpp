@@ -175,7 +175,7 @@ void menuBusqueda() {
 
                 cout << endl;
                 for (int i = 0; i < datos; i++) {
-                    arreglo[i] = i;  // Se generan números sin repetir
+                    arreglo[i] = i;
                 }
                 mezclarArreglo(arreglo, datos);
                 
@@ -205,12 +205,14 @@ void menuBusqueda() {
                 }
                 
                 // Calcular promedios
-                promedio[C].busquedaBinaria = 0;
+               	double sumaTiemposBinaria = 0, sumaTiemposExponencial = 0;
                 promedio[C].busquedaExponencial = 0;
                 for (int i = 0; i < busquedas; i++) {
-                    promedio[C].busquedaBinaria += tiempo[i].busquedaBinaria;
-                    promedio[C].busquedaExponencial += tiempo[i].busquedaExponencial;
+                    sumaTiemposBinaria += tiempo[i].busquedaBinaria;
+                    sumaTiemposExponencial += tiempo[i].busquedaExponencial;
                 }
+                promedio[C].busquedaBinaria = sumaTiemposBinaria/busquedas;
+                promedio[C].busquedaExponencial = sumaTiemposExponencial/busquedas;
                 imprimirComparacion(tiempo, promedio, busquedas, C, datos, busquedas, elementoBuscar, r);
                 C++;  // Incrementar C después de la comparación
                 
