@@ -1,6 +1,20 @@
 #include "busqueda.h"
 #include "utilidades.h"
 
+//Busqueda secuencial en datos desordenados
+// Función de búsqueda secuencial ordenada
+int SecuencialOrd(int* Arr_crlV, int n, int dato) {
+    int i = 0;
+    while (i < n && Arr_crlV[i] < dato) {
+    i++;
+    }
+    if (i >= n || Arr_crlV[i] > dato) {
+    return -i; // Retorna -i si el dato no fue encontrado
+    } else {
+    return i; // Retorna la posición del dato encontrado
+ }
+}
+
 //Busqueda binaria
 // Función de búsqueda binaria
 int BusquedaBinaria(int* Arr_crlV, int n, int dato) {
@@ -18,19 +32,4 @@ int BusquedaBinaria(int* Arr_crlV, int n, int dato) {
     }
     return -1; // Retorna -1 si el dato no fue encontrado
 }
-
-
-int busquedaExponencial(int a[], int n, int x) {
-    if (n == 0) return -1; // Si el arreglo está vacío
-    if (a[0] == x) return 0;
-    
-    int i = 1;
-    while (i < n && a[i] <= x) {
-        i = i * 2; // Incrementa exponencialmente
-    }
-    
-    // Realiza búsqueda binaria en el rango adecuado
-    return busquedaBinaria(a, min(i, n), x);  
-}
-
 

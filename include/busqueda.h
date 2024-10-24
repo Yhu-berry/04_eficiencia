@@ -1,8 +1,10 @@
 #ifndef BUSQUEDA_H
+
 #define BUSQUEDA_H
 
-int busquedaExponencial(int a[], int n, int x);
+//Busqueda Secuencial 
+int SecuencialOrd(int* Arr_crlV, int n, int dato);
 //Busqueda Bianria (Requiere una funcion para ordenarlo)
 int BusquedaBinaria(int* Arr_crlV, int n, int dato); 
 
-#endif
+#endif 

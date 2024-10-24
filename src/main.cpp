@@ -138,7 +138,7 @@ void menuBusqueda(int arr[], int n) {
     cout << "=============================" << endl;
     cout << " Metodos de Busqueda a Comparar " << endl;
     cout << "=============================" << endl;
-    cout << "1. Busqueda Binaria vs Busqueda Exponencial" << endl;
+    cout << "1. Busqueda Binaria vs Busqueda Secuencial" << endl;
     cout << "Seleccione una opcion: ";
     cin >> opcionBusqueda;
     system("CLS");
@@ -168,12 +168,12 @@ void menuBusqueda(int arr[], int n) {
         elapsedTime1 = end - start;
         cout << "Busqueda Binaria: " << elapsedTime1.count() <<"ms, Posicion: "<<resultadoBinaria<<endl;
         
-        // Comparación Búsqueda exponecial
+        // Comparación Búsqueda Secuencial
         start = chrono::steady_clock::now();
-        int resultadoExponencial = busquedaExponencial(Arr_crlV, n, dato);
+        int resultadoSecuencial = SecuencialOrd(Arr_crlV, n, dato);
         end = chrono::steady_clock::now();
         elapsedTime2 = end - start;
-        cout << "Busqueda Exponencial: " << elapsedTime2.count()<< "ms, Posicion: "<<resultadoExponencial<<endl;
+        cout << "Busqueda Secuencial: " << elapsedTime2.count()<< "ms, Posicion: "<<resultadoSecuencial<<endl;
     } else {
         cout << "Opcion no valida." << endl;
     }
