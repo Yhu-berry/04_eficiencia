@@ -9,6 +9,6 @@ void shellsort(int* Arr_crlV, int n );
 void QuickSort(int* Arr_crlV, int inicio, int final); 
 
 //Ordena usando la funcion de Insercion Binaria
-void InsercionBinaria(int* Arr_crlV, int n);
+//void InsercionBinaria(int* Arr_crlV, int n);
 
 #endif
