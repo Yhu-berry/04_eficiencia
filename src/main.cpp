@@ -3,7 +3,7 @@
 #include "busqueda.h"
 #include <chrono>   //Libreria para medir el tiempo en milisegundos
 #include <iomanip>  // Libreria para manipulacion de flujo de salida
-#include <cstdlib> // Libreria necesaria para la funcion rand()
+#include <cstdlib>  // Libreria necesaria para la funcion rand()
 #include <iostream>
 
 
@@ -15,7 +15,7 @@ void menuBusqueda(int arr[], int n);
 
 int main() {
     int n;
-    cout << "Cantidad de terminos a comparar (máximo 1000000):\t";
+    cout << "Cantidad de terminos a comparar (maximo 1000000):\t";
     cin >> n;
     cout<<"\n";
 
@@ -78,7 +78,7 @@ void menuOrdenacion(int arr[], int n) {
 
     //Variables para medir el tiempo de ejecucion
     chrono::steady_clock::time_point start,end;
-    chrono::duration<double,milli> elapsedTime1. elapsedTime2;
+    chrono::duration<double,milli> elapsedTime1, elapsedTime2;
 
     switch (opcionOrdenacion) {
         case 1:
@@ -149,3 +149,4 @@ void menuBusqueda(int arr[], int n) {
             cout << "Intente de nuevo." << endl;
     }
 }
+
