@@ -3,7 +3,7 @@
 #define BUSQUEDA_H
 
 //Busqueda Secuencial 
-int BusquedaSecuencial(int* Arr_crlV, int n, int dato);
+int SecuencialOrd(int* Arr_crlV, int n, int dato);
 //Busqueda Bianria (Requiere una funcion para ordenarlo)
 int BusquedaBinaria(int* Arr_crlV, int n, int dato); 
 

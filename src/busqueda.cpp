@@ -1,4 +1,5 @@
 #include "busqueda.h"
+#include "utilidades.h"
 
 //Busqueda secuencial en datos desordenados
 // Función de búsqueda secuencial ordenada

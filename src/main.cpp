@@ -107,14 +107,14 @@ void menuOrdenacion(int arr[], int n) {
             InsercionBinaria(Arr_crlV2, n);
             end = chrono::steady_clock::now();
             elapsedTime2 = end - start;
-            cout << "Inserción Binaria: " << elapsedTime2.count() << " ms" << endl;
+            cout << "Insercion Binaria: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 3:
             start = chrono::steady_clock::now();
             InsercionBinaria(Arr_crlV1, n);
             end = chrono::steady_clock::now();
             elapsedTime1 = end - start;
-            cout << "Inserción Binaria: " << elapsedTime1.count() << " ms" << endl;
+            cout << "Insercion Binaria: " << elapsedTime1.count() << " ms" << endl;
             
             start = chrono::steady_clock::now();
             shellsort(Arr_crlV2, n);
@@ -136,42 +136,48 @@ void menuBusqueda(int arr[], int n) {
     int opcionBusqueda;
     system("CLS");
     cout << "=============================" << endl;
-    cout << " Métodos de Búsqueda a Comparar " << endl;
+    cout << " Metodos de Busqueda a Comparar " << endl;
     cout << "=============================" << endl;
-    cout << "1. Búsqueda Binaria vs Búsqueda Secuencial" << e
-    cout << "Seleccione una opción: ";
+    cout << "1. Busqueda Binaria vs Busqueda Secuencial" << endl;
+    cout << "Seleccione una opcion: ";
     cin >> opcionBusqueda;
     system("CLS");
+
     int* Arr_crlV = new int[n];
     copiarArr(Arr_crlV, arr, n);
-    Busqueda 3
+    
     // Ordenar el arreglo antes de realizar las búsquedas
     shellsort(Arr_crlV, n);
+
     // Mostrar el arreglo ordenado
     cout << "Arreglo ordenado: ";
     imprimirArr(Arr_crlV, n);
+
     // Variables para medir el tiempo
     chrono::steady_clock::time_point start, end;
-    chrono::duration<double, milli> elapsedTime1, elapsedTime2
+    chrono::duration<double, milli> elapsedTime1, elapsedTime2;
+
     if (opcionBusqueda == 1) {
-    int dato;
-    cout << "Ingrese el dato a buscar: ";
-    cin >> dato;
-    // Comparación Búsqueda Binaria
-    start = chrono::steady_clock::now();
-    int resultadoBinaria = BusquedaBinaria(Arr_crlV, n, da
-    end = chrono::steady_clock::now();
-    elapsedTime1 = end - start;
-    cout << "Búsqueda Binaria: " << elapsedTime1.count() <
-    // Comparación Búsqueda Secuencial
-    start = chrono::steady_clock::now();
-    int resultadoSecuencial = SecuencialOrd(Arr_crlV, n, d
-    end = chrono::steady_clock::now();
-    elapsedTime2 = end - start;
-    cout << "Búsqueda Secuencial: " << elapsedTime2.count
+        int dato;
+        cout << "Ingrese el dato a buscar: ";
+        cin >> dato;
+        // Comparación Búsqueda Binaria
+        start = chrono::steady_clock::now();
+        int resultadoBinaria = BusquedaBinaria(Arr_crlV, n, dato);
+        end = chrono::steady_clock::now();
+        elapsedTime1 = end - start;
+        cout << "Busqueda Binaria: " << elapsedTime1.count() <<"ms, Posicion: "<<resultadoBinaria<<endl;
+        
+        // Comparación Búsqueda Secuencial
+        start = chrono::steady_clock::now();
+        int resultadoSecuencial = SecuencialOrd(Arr_crlV, n, dato);
+        end = chrono::steady_clock::now();
+        elapsedTime2 = end - start;
+        cout << "Busqueda Secuencial: " << elapsedTime2.count()<< "ms, Posicion: "<<resultadoSecuencial<<endl;
     } else {
-    cout << "Opción no válida." << endl;
+        cout << "Opcion no valida." << endl;
     }
+
     delete[] Arr_crlV;
     system("pause"); // Pausa para que el usuario pueda ver lo
 }
