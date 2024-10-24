@@ -110,7 +110,17 @@ void menuOrdenacion(int arr[], int n) {
             cout << "Inserción Binaria: " << elapsedTime2.count() << " ms" << endl;
             break;
         case 3:
+            start = chrono::steady_clock::now();
+            InsercionBinaria(Arr_crlV1, n);
+            end = chrono::steady_clock::now();
+            elapsedTime1 = end - start;
+            cout << "Inserción Binaria: " << elapsedTime1.count() << " ms" << endl;
             
+            start = chrono::steady_clock::now();
+            shellsort(Arr_crlV2, n);
+            end = chrono::steady_clock::now();
+            elapsedTime2 = end - start;
+            cout << "ShellSort: " << elapsedTime2.count() << " ms" << endl;
             break;
         default:
             cout << "Intente de nuevo." << endl;
