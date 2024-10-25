@@ -36,15 +36,15 @@ int busquedaBinaria(int a[], int n, int dato) {
 
 // Búsqueda exponencial
 int busquedaExponencial(int a[], int n, int x) {
-    if (n == 0) return -1; // Si el arreglo está vacío
-    if (a[0] == x) return 0;
-    
-    int i = 1;
-    while (i < n && a[i] <= x) {
-        i = i * 2; // Incrementa exponencialmente
+    if (n==0) return -1;
+    if (a[0]==x) return 0;
+    int i=1;
+    while(i<n && a[i]<=x) {
+        i=i*2;
     }
-    
-    // Realiza búsqueda binaria en el rango adecuado
     return busquedaBinaria(a, min(i, n), x);  
 }
+
+
+
 
