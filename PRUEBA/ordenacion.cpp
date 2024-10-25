@@ -30,11 +30,8 @@ void Reduce(int* Arr_crlV, int inicio, int final) {
     int der = final;
     int pos = izq;
     int cen = 1;
-
     while (cen == 1) {
         cen = 0;
-
-        // recorrido de derecha a izquierda
         while (Arr_crlV[pos] <= Arr_crlV[der] && pos != der) {
             der--;
         }
@@ -45,8 +42,6 @@ void Reduce(int* Arr_crlV, int inicio, int final) {
             pos = der;
             cen = 1;
         }
-
-        // recorrido de izquierda a derecha
         while (Arr_crlV[pos] >= Arr_crlV[izq] && pos != izq) {
             izq++;
         }
@@ -58,14 +53,9 @@ void Reduce(int* Arr_crlV, int inicio, int final) {
             cen = 1;
         }
     }
-
-    // Llamadas recursivas
-    // subarreglo izquierdo
     if (pos - 1 > inicio) {
         Reduce(Arr_crlV, inicio, pos - 1);
     }
-
-    // subarreglo derecho
     if (pos + 1 < final) {
         Reduce(Arr_crlV, pos + 1, final);
     }
@@ -81,7 +71,6 @@ void InsercionBinaria(int* Arr_crlV, int n) {
         int aux = Arr_crlV[i];
         int izq = 0;
         int der = i - 1;
-
         while (izq <= der) {
             int m = (izq + der) / 2;
             if (aux < Arr_crlV[m]) {
@@ -90,10 +79,11 @@ void InsercionBinaria(int* Arr_crlV, int n) {
                 izq = m + 1;
             }
         }
-
         for (int j = i - 1; j >= izq; --j) {
             Arr_crlV[j + 1] = Arr_crlV[j];
         }
-        Arr_crlV[izq] = aux; // inserción
+        Arr_crlV[izq] = aux;
     }
 }
+
+
