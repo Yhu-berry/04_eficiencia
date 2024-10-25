@@ -1,6 +1,10 @@
 #ifndef UTILIDADES_H
 #define UTILIDADES_H
 #include "busqueda.h"
+#include <windows.h>
+#define color SetConsoleTextAttribute
+
+extern HANDLE hConsole;
 
 //Funcion para imprimir el arreglo
 void imprimirArr(const int* arr, int n);

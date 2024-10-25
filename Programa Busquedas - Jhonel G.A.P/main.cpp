@@ -5,7 +5,8 @@
 #include <cstdlib>  // Libreria necesaria para la funcion rand()
 #include <iostream>
 #include <algorithm>
-#include <random> 
+#include <random>
+
 using namespace std;
 
 void menudeMain();
@@ -102,16 +103,35 @@ void menuBusqueda() {
                 break;
             }
             case 2:
-                cout << "HISTORIAL DE COMPARACIONES" << endl << endl;
-                for (int i = 0; i < C; i++) {
-                    cout << "COMPARACION " << i + 1 << endl;
-                    cout << "Datos analizados: " << cantidadDatos[i] << endl;
-                    cout << "Busquedas realizadas: " << cantidadBusquedas[i] << endl;
-                    cout << "Promedio de busqueda binaria: " << promedio[i].busquedaBinaria << " ms." << endl;
-                    cout << "Promedio de busqueda exponencial: " << promedio[i].busquedaExponencial << " ms." << endl;
-                    cout << endl;
-                }
-                break;
+			    cout << "HISTORIAL DE COMPARACIONES" << endl << endl;
+			    
+			    for (int i = 0; i < C; i++) {
+			        cout << "COMPARACION " << i + 1 << endl;
+			        cout << "Datos analizados: " << cantidadDatos[i] << endl;
+			        cout << "Busquedas realizadas: " << cantidadBusquedas[i] << endl;
+			        
+			        cout << "Promedio de busqueda binaria: ";
+			        if (promedio[i].busquedaBinaria > promedio[i].busquedaExponencial) {
+			            color(hConsole, 4);
+			        } else if (promedio[i].busquedaBinaria < promedio[i].busquedaExponencial) {
+			            color(hConsole, 10);
+			        }
+			        cout << promedio[i].busquedaBinaria << " ms" << endl;
+			        
+			        color(hConsole, 7); // Reset color
+			        
+			        cout << "Promedio de busqueda exponencial: ";
+			        if (promedio[i].busquedaExponencial > promedio[i].busquedaBinaria) {
+			            color(hConsole, 4);
+			        } else if (promedio[i].busquedaExponencial < promedio[i].busquedaBinaria) {
+			            color(hConsole, 10);
+			        }
+			        cout << promedio[i].busquedaExponencial << " ms" << endl;
+		        
+			        color(hConsole, 7); // Reset color
+			        cout << endl;
+		    	}
+	    		break;
             case 3:
                 cout << "Saliendo del programa." << endl;
                 break;

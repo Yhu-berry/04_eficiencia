@@ -5,7 +5,10 @@
 #include <algorithm>
 #include <random> 
 #include <iomanip> 
+#include <windows.h>
 using namespace std;
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void imprimirArr(const int* arr, int n){
     for(int i=0; i<n ; i++){
@@ -23,15 +26,52 @@ void imprimirComparacion(Metodos tiempo[], Metodos promedio[], int n, int c, int
          << "Total de datos: " << datos << endl
          << "Total de busquedas: " << busquedas << endl << endl;
                 cout << "\tBUSQUEDA BINARIA" << "\t\t\t" << "BUSQUEDA EXPONENCIAL" << endl << endl;
+                
     for (int i = 0; i < n; i++) {
-
-        cout << "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "):" 
-		<< fixed << setprecision(7) << tiempo[i].busquedaBinaria << " ms" << "\t\t\t"  
-		<< tiempo[i].busquedaExponencial << " ms" << endl;
+    	color(hConsole, 7);
+    	if(tiempo[i].busquedaBinaria > tiempo[i].busquedaExponencial){
+    		cout << "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "): " << fixed << setprecision(7);
+    		color(hConsole, 4);
+			cout << tiempo[i].busquedaBinaria << " ms";
+			color(hConsole, 10);
+			cout << "\t\t\t"  << tiempo[i].busquedaExponencial << " ms" << endl;
+		} else if(tiempo[i].busquedaBinaria < tiempo[i].busquedaExponencial){
+			cout << "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "): " << fixed << setprecision(7);
+    		color(hConsole, 10);
+			cout << tiempo[i].busquedaBinaria << " ms";
+			color(hConsole, 4);
+			cout << "\t\t\t"  << tiempo[i].busquedaExponencial << " ms" << endl;
+		} else {
+			cout << "Busqueda " << i + 1 << " (" << elementoBuscar[i] << "): " << fixed << setprecision(7);
+			cout << tiempo[i].busquedaBinaria << " ms";
+			cout << "\t\t\t"  << tiempo[i].busquedaExponencial << " ms" << endl;
+		}
     }
+    color(hConsole, 7);
     cout << endl;
-    cout << "\tPromedio: " << promedio[c].busquedaBinaria 
-         << "\t\t\t" << "Promedio: " << promedio[c].busquedaExponencial << endl;
+    if(promedio[c].busquedaBinaria > promedio[c].busquedaExponencial){
+    	cout << "\tPromedio: ";
+    	color(hConsole, 4);
+		cout << promedio[c].busquedaBinaria;
+		color(hConsole, 7);
+        cout << "\t\t\t" << "Promedio: "; 
+        color(hConsole, 10);
+		cout << promedio[c].busquedaExponencial << endl;
+	} else if (promedio[c].busquedaBinaria < promedio[c].busquedaExponencial){
+		cout << "\tPromedio: ";
+    	color(hConsole, 10);
+		cout << promedio[c].busquedaBinaria;
+		color(hConsole, 7);
+        cout << "\t\t\t" << "Promedio: "; 
+        color(hConsole, 4);
+		cout << promedio[c].busquedaExponencial << endl;
+	} else {
+		cout << "\tPromedio: ";
+		cout << promedio[c].busquedaBinaria;
+        cout << "\t\t\t" << "Promedio: "; 
+		cout << promedio[c].busquedaExponencial << endl;
+	}
+    color(hConsole, 7);
 }
 
 
