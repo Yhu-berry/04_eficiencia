@@ -4,20 +4,6 @@
 
 using namespace std;
 
-// Búsqueda secuencial en datos desordenados
-// Función de búsqueda secuencial ordenada
-int SecuencialOrd(int* Arr_crlV, int n, int dato) {
-    int i = 0;
-    while (i < n && Arr_crlV[i] < dato) {
-        i++;
-    }
-    if (i >= n || Arr_crlV[i] > dato) {
-        return -i; // Retorna -i si el dato no fue encontrado
-    } else {
-        return i; // Retorna la posición del dato encontrado
-    }
-}
-
 // Búsqueda binaria
 // Función de búsqueda binaria
 int busquedaBinaria(int a[], int n, int dato) {
@@ -56,6 +42,19 @@ int busquedaExponencial(int a[], int n, int x) {
     return busquedaBinaria(a, min(i, n), x);  
 }
 
+// Búsqueda secuencial en datos desordenados
+// Función de búsqueda secuencial ordenada
+/*int SecuencialOrd(int* Arr_crlV, int n, int dato) {
+    int i = 0;
+    while (i < n && Arr_crlV[i] < dato) {
+        i++;
+    }
+    if (i >= n || Arr_crlV[i] > dato) {
+        return -i; // Retorna -i si el dato no fue encontrado
+    } else {
+        return i; // Retorna la posición del dato encontrado
+    }
+}*/
 
 	
 

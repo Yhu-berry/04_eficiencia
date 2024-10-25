@@ -1,5 +1,4 @@
 #include "utilidades.h"
-#include "ordenacion.h"
 #include "busqueda.h"
 #include <chrono>   //Libreria para medir el tiempo en milisegundos
 #include <iomanip>  // Libreria para manipulacion de flujo de salida
@@ -14,125 +13,7 @@ void menuOrdenacion(int arr[], int n);
 void menuBusqueda();
 
 int main() {
-    int opcion;
-    int n;            // Declarar n aquí para que sea accesible en todo el scope
-    int* arr = nullptr; // Inicializar arr como un puntero nulo para que no dé error al usar delete
-
-    do {// Limpia la pantalla
-        system("cls"); 
-        menudeMain();
-        cin >> opcion;
-		system("cls"); 
-        switch (opcion) {
-            case 1: {
-                cout << "Cantidad de terminos a comparar (maximo 1000000):\t";
-                cin >> n;
-                cout << "\n";
-                
-                arr = new int[n]; // Asigna memoria para el arreglo
-                generarArreglo(arr, n);
-                menuOrdenacion(arr, n);
-                break;
-            }
-            case 2: {
-                menuBusqueda();
-                break;
-            }
-            case 3:
-                cout << "Saliendo del programa..." << endl;
-                break;
-            default:
-                cout << "Intente de nuevo." << endl;
-        }
-    } while (opcion != 3);
-
-    delete[] arr; // Libera la memoria del arreglo
-    return 0;
-}
-
-void menudeMain() {
-    cout << "=============================" << endl;
-    cout << " Menu de Comparacion " << endl;
-    cout << "=============================" << endl;
-    cout << "1. Comparar Metodos de Ordenacion" << endl;
-    cout << "2. Comparar Metodos de Busqueda" << endl;
-    cout << "3. Salir" << endl << endl;
-    cout << "Seleccione una opcion: ";
-}
-
-void menuOrdenacion(int arr[], int n) { 
-    int opcionOrdenacion;
-    system("CLS");
-    cout << "=============================" << endl;
-    cout << " Metodos de Ordenacion a Comparar " << endl;
-    cout << "=============================" << endl;
-    cout << "1. ShellSort vs QuickSort" << endl;
-    cout << "2. QuickSort vs InsercionBinaria" << endl;
-    cout << "3. InsercionBinaria vs ShellSort" << endl << endl;
-    cout << "Seleccione una opcion: ";
-    cin >> opcionOrdenacion;
-    system("CLS");
-
-    //Crear copias del arreglo original para cada método de ordenación
-    int* Arr_crlV1 = new int[n];
-    int* Arr_crlV2 = new int[n];
-    copiarArr(Arr_crlV1, arr, n);
-    copiarArr(Arr_crlV2, arr, n);
-
-    //Variables para medir el tiempo de ejecucion
-    chrono::steady_clock::time_point start,end;
-    chrono::duration<double,milli> elapsedTime1, elapsedTime2;
-
-    switch (opcionOrdenacion) {
-        case 1:
-            // Comparación ShellSort
-            start = chrono::steady_clock::now();
-            shellsort(Arr_crlV1, n);
-            end = chrono::steady_clock::now();
-            elapsedTime1 = end - start;
-            cout << "ShellSort: " << elapsedTime1.count() << " ms" << endl;
-
-            // Comparación QuickSort
-            start = chrono::steady_clock::now();
-            QuickSort(Arr_crlV2, 0, n - 1);
-            end = chrono::steady_clock::now();
-            elapsedTime2 = end - start;
-            cout << "QuickSort: " << elapsedTime2.count() << " ms" << endl;
-            break;
-        case 2:
-            start = chrono::steady_clock::now();
-            QuickSort(Arr_crlV1, 0, n - 1);
-            end = chrono::steady_clock::now();
-            elapsedTime1 = end - start;
-            cout << "QuickSort: " << elapsedTime1.count() << " ms" << endl;
-
-            start = chrono::steady_clock::now();
-            InsercionBinaria(Arr_crlV2, n);
-            end = chrono::steady_clock::now();
-            elapsedTime2 = end - start;
-            cout << "Insercion Binaria: " << elapsedTime2.count() << " ms" << endl;
-            break;
-        case 3:
-            start = chrono::steady_clock::now();
-            InsercionBinaria(Arr_crlV1, n);
-            end = chrono::steady_clock::now();
-            elapsedTime1 = end - start;
-            cout << "Insercion Binaria: " << elapsedTime1.count() << " ms" << endl;
-            
-            start = chrono::steady_clock::now();
-            shellsort(Arr_crlV2, n);
-            end = chrono::steady_clock::now();
-            elapsedTime2 = end - start;
-            cout << "ShellSort: " << elapsedTime2.count() << " ms" << endl;
-            break;
-        default:
-            cout << "Intente de nuevo." << endl;
-    }
-
-    // Liberar memoria
-    delete[] Arr_crlV1;
-    delete[] Arr_crlV2;
-    system("pause"); 
+	menuBusqueda();	
 }
 
 void menuBusqueda() {
@@ -174,13 +55,11 @@ void menuBusqueda() {
                 int REPETICIONES = 500000;
 
                 cout << endl;
-                for (int i = 0; i < datos; i++) {
-                    arreglo[i] = i;
-                }
+                arrSucesivo(arreglo, datos);
                 mezclarArreglo(arreglo, datos);
                 
                 cout << "Arreglo: ";
-                mostrarArreglo(arreglo, datos);
+                imprimirArr(arreglo, datos);
                 cout << endl;
 				
 				shellsort(arreglo, datos);
